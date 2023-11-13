@@ -11,7 +11,7 @@ This repository contains dockerized build steps for installing Jellyfin on a Tiz
   2. Open the 'apps' app
   3. Press the '123'/'quick settings' button on your remote. Press the 'down arrow' until a numerical keypad is displayed
   4. Enter the digits '12345' and press done
-  5. Set developer mode to 'on' and enter the IP of the host/computer you're running the docker container on
+  5. Set developer mode to 'on' and enter the IP of the host/computer you're running the docker container on (use the 123 menu and press done on each text box)
      - Windows: Click on the "wifi" symbol in your system tray. Click "properties" on your connected network". Scroll to the end of the list and find "IPv4 address" under "Properties". Enter this address
      - Linux: Open a terminal and run `ifconfig`. Enter the address next to "inet". You can use `iwconfig` to help identify your wifi adapter.
   6. Turn off and on your TV again
