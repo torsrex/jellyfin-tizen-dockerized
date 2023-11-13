@@ -68,4 +68,9 @@ This will first generate the certificates and store them for later use so that i
 
 - Tested on Linux Mint 21.2 with Docker version 24.0.7
 - Tested on Windows 10.0.19045.3636 with Docker version 24.0.6
+- Tested with the following version of the dependencies:
+  - [jellyfin-tizen@157cadde2d7060331817e4a4792b5f395f947fb6](https://github.com/jellyfin/jellyfin-tizen/commit/157cadde2d7060331817e4a4792b5f395f947fb6)
+  - [jellyfin-web@4b6bbcfe2671b21a79e347241eed3c70acaad9e3](https://github.com/jellyfin/jellyfin-web/commit/4b6bbcfe2671b21a79e347241eed3c70acaad9e3)
+  - [tizen-studio 5.5](https://download.tizen.org/sdk/Installer/tizen-studio_5.5/web-cli_Tizen_Studio_5.5_ubuntu-64.bin)
+  - Node Major version 20
 - Not affiliated with Jellyfin or any of the referenced projects. I just wanted an easy, reliable way to install and keep Jellyfin updated on my tv without resorting to prebuilds
