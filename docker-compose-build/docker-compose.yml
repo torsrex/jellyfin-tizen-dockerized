@@ -6,6 +6,8 @@ services:
     build:
       context: ./tizencertificate
       dockerfile: Dockerfile
+      args:
+        - TIZEN_STUDIO_URL=https://download.tizen.org/sdk/Installer/tizen-studio_5.5/web-cli_Tizen_Studio_5.5_ubuntu-64.bin
     volumes:
       - ./jellyfindeploy/certificates/author:/tmp/tizen-output/author
       - ./jellyfindeploy/certificates/profile:/tmp/tizen-output/profile
@@ -17,6 +19,11 @@ services:
     build:
       context: ./jellyfindeploy
       dockerfile: Dockerfile
+      args:
+        - TIZEN_STUDIO_URL=https://download.tizen.org/sdk/Installer/tizen-studio_5.5/web-cli_Tizen_Studio_5.5_ubuntu-64.bin
+        - NODE_MAJOR=20
+        - JELLYFIN_VERSION=release-10.8.z
+        - JELLYFIN_TIZEN_VERSION=master
     environment:
       - TV_IP= # Enter TV IP here
     profiles:
