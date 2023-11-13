@@ -14,7 +14,7 @@ This repository contains dockerized build steps for installing Jellyfin on a Tiz
   5. Set developer mode to "on" and enter the IP of the host/computer you're running the docker container on (use the 123 menu and press done on each text box)
      - Windows: Click on the "wifi" symbol in your system tray. Click "properties" on your connected network. Scroll to the end of the list and find "IPv4 address" under "Properties". Enter this address
      - Linux: Open a terminal and run `ifconfig`. Enter the address next to "inet". You can use `iwconfig` to help identify your wifi adapter.
-  6. Turn off and on your TV again
+  6. Turn off your tv by holding the power button for at least 2 seconds and turn on your tv again
   7. Press the "123/quick settings" button on your remote. Use the "up arrow" button to get to the quick settings menu. Navigate to "all settings" and go to connection -> network. Open "network status" and click on "IP settings"
   8. Write down the entry next to the "IP address" entry (it may be greyed out)
   9. After installing Jellyfin you can repeat the above steps to turn off developer mode
@@ -53,6 +53,7 @@ This will first generate the certificates and store them for later use so that i
 - The build crashes when installing Jellyfin on the tv with the error `reason: Author certificate not match` -> The generated certificate is incompatible with the current Jellyfin install. Uninstall Jellyfin on the TV and run the script again
 - The build crashes with the error `Error: TV_IP is not set.` -> You forgot to set the TV_IP when running the docker build command
 - The build crashes with an error similar to `failed to connect to 192.168.1.191:26101` -> You likely whitelisted the wrong ip on the tv
+- The build crashes with an error similar to ` error: failed to connect to remote target '192.168.1.191'` -> When turning off and on your tv you need to hold the power button for at least 2 seconds as instructed in the popup. Just pressing the power button isn't enough
 - You used option 1 and installed Jellyfin successfully, uninstalled it, and wanted to install it again, but nothing happens -> For simplicity sake, option 1 does everything during the docker build phase with no runtime step as opposed to option 2. However, this means that the install step is also cached if it succeeds. The script is set up so that if any of the parameters listed under [Additional parameters](#additional-parameters) changes then it will re-run the install. However, if you want to install the same version to the same TV, you can set the `NONCE` parameter to a random string (replace loremipsum) like so: `docker build . --build-arg="TV_IP=192.168.1.191" --build-arg="NONCE=loremipsum"`. Alternatively, use `docker build . --build-arg="TV_IP=192.168.1.191" --no-cache`, however, this will also run the build steps again so this will take longer
 - (Linux) The build crashes when installing jellyfin-web dependencies or building jellyfin-web --> Too little memory allocated to docker. In my testing I tried with 3.8GB initially which would occasionally crash. Increasing the limit to 10GB solved this
   1. Open Docker Desktop
