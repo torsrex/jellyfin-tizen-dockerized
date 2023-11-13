@@ -4,7 +4,7 @@ ENV TIZEN_STUDIO_URL=https://download.tizen.org/sdk/Installer/tizen-studio_5.5/w
 
 # Add build dependencies
 RUN apt-get update \
-  && apt-get install -y curl git expect
+  && apt-get install -y curl
 # Create jellyfin user as tizen cannot be installed as root
 RUN useradd -m jellyfin
 USER jellyfin
