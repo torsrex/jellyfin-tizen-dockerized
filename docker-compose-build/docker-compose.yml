@@ -1,0 +1,23 @@
+version: "3.4"
+
+services:
+  tizencertificate:
+    image: tizencertificate
+    build:
+      context: ./tizencertificate
+      dockerfile: Dockerfile
+    volumes:
+      - ./jellyfindeploy/certificates/author:/tmp/tizen-output/author
+      - ./jellyfindeploy/certificates/profile:/tmp/tizen-output/profile
+      - ./jellyfindeploy/certificates/distributor:/tmp/tizen-output/distributor
+    profiles:
+      - certificate
+  jellyfindeploy:
+    image: jellyfindeploy
+    build:
+      context: ./jellyfindeploy
+      dockerfile: Dockerfile
+    environment:
+      - TV_IP=192.168.1.191 # Enter TV IP here
+    profiles:
+      - deploy
