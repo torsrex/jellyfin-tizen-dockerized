@@ -44,6 +44,7 @@ This will first generate the certificates and store them for later use so that i
 - TIZEN_STUDIO_URL: Link to download tizen studio from. You can get the latest link from https://developer.tizen.org/development/tizen-studio/download, but you probably don't have to change this
 - NODE_MAJOR: The major Node version. Can be changed to upgrade the Node version used to build Jellyfin
 - JELLYFIN_VERSION: Branch name or tag name of the Jellyfin version to install
+- JELLYFIN_TIZEN_VERSION: Branch name or tag name of the Jellyfin tizen version to install
 - TV_IP: The ip address of your Samsung tv
 - NONCE: (Only for option 1) can be used to trigger a re-install of the same build to the same tv by setting this to a random string
 

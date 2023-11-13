@@ -36,6 +36,7 @@ RUN sed -i "s|password=\"/home/jellyfin/tizen-studio-data/keystore/author/jellyf
 # cached certificates on subsequent builds
 ARG NODE_MAJOR=20
 ARG JELLYFIN_VERSION=release-10.8.z
+ARG JELLYFIN_TIZEN_VERSION=master
 
 # Install node from nodeseource
 USER root
@@ -60,7 +61,7 @@ RUN npm run build:production --loglevel verbose
 WORKDIR /app
 
 # Clone jellyfin-tizen and build
-RUN git clone https://github.com/jellyfin/jellyfin-tizen.git
+RUN git clone -b $JELLYFIN_TIZEN_VERSION https://github.com/jellyfin/jellyfin-tizen.git
 WORKDIR /app/jellyfin-tizen
 ENV JELLYFIN_WEB_DIR=/app/jellyfin-web/dist
 RUN npm ci --no-audit --loglevel verbose
