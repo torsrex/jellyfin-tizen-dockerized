@@ -8,15 +8,15 @@ This repository contains dockerized build steps for installing Jellyfin on a Tiz
   - Use WSL2 for Windows
 - Samsung TV in development mode
   1. Turn on TV
-  2. Open the 'apps' app
-  3. Press the '123'/'quick settings' button on your remote. Press the 'down arrow' until a numerical keypad is displayed
-  4. Enter the digits '12345' and press done
-  5. Set developer mode to 'on' and enter the IP of the host/computer you're running the docker container on (use the 123 menu and press done on each text box)
-     - Windows: Click on the "wifi" symbol in your system tray. Click "properties" on your connected network". Scroll to the end of the list and find "IPv4 address" under "Properties". Enter this address
+  2. Open the "apps" app
+  3. Press the "123/quick settings" button on your remote. Press the "down arrow" button on your remote until a numerical keypad is displayed
+  4. Enter the digits "12345" and press done
+  5. Set developer mode to "on" and enter the IP of the host/computer you're running the docker container on (use the 123 menu and press done on each text box)
+     - Windows: Click on the "wifi" symbol in your system tray. Click "properties" on your connected network. Scroll to the end of the list and find "IPv4 address" under "Properties". Enter this address
      - Linux: Open a terminal and run `ifconfig`. Enter the address next to "inet". You can use `iwconfig` to help identify your wifi adapter.
   6. Turn off and on your TV again
-  7. Press the '123'/'quick settings' button on your remote. Use the 'up arrow' to get to the quick settings menu. Navigate to 'all settings' and go to connection -> network. Open 'network status' and click on 'IP settings'
-  8. Write down the entry next to the 'IP address' entry (it may be greyed out)
+  7. Press the "123/quick settings" button on your remote. Use the "up arrow" button to get to the quick settings menu. Navigate to "all settings" and go to connection -> network. Open "network status" and click on "IP settings"
+  8. Write down the entry next to the "IP address" entry (it may be greyed out)
   9. After installing Jellyfin you can repeat the above steps to turn off developer mode
 
 ## Build and Install Jellyfin
@@ -36,7 +36,7 @@ This will first generate the certificates and store them for later use so that i
 1. Enter the docker-compose-build directory using `cd docker-compose-build`
 2. Run `docker-compose --profile certificate up --build` to generate the certificates
 3. Modify the docker-compose.yml file and set the TV_IP variable e.g. TV_IP=192.168.1.191 which is the ip address you wrote down from step 8 in setting the tv to development mode
-4. Run `docker-compose --profile deploy up --build`
+4. Run `docker-compose --profile deploy up --build` to deploy Jellyfin to the tv
 5. If the build succeeds the Jellyfin app should be installed on your tv. If not, see [Troubleshooting](#troubleshooting)
 
 ## Additional Parameters
@@ -68,4 +68,4 @@ This will first generate the certificates and store them for later use so that i
 
 - Tested on Linux Mint 21.2 with Docker version 24.0.7
 - Tested on Windows 10.0.19045.3636 with Docker version 24.0.6
-- Not affiliated with Jellyfin or any of the referenced projects. I just wanted an easy, repeatable way, to install and keep Jellyfin updated on my tv without resorting to prebuilds
+- Not affiliated with Jellyfin or any of the referenced projects. I just wanted an easy, reliable way to install and keep Jellyfin updated on my tv without resorting to prebuilds
