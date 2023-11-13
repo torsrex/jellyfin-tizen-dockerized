@@ -30,16 +30,13 @@ This will run the entire build and installation procedure inside a single docker
 
 ## Option 2: Use intermediate container to export development certificates
 
+This will first generate the certificates and store them for later use so that if the Docker cache is cleared or the script is run on a different computer the certificates can still be used.
+
 1. Enter the docker-compose-build directory using `cd docker-compose-build`
 2. Run `docker-compose --profile certificate up --build` to generate the certificates
-3. Do one of the following
-   - Build through docker-compose:
-     1. Modify docker-compose.yml file and set the TV_IP variable e.g. TV_IP=192.168.1.191 which is the ip address you wrote down from step 8 in setting the tv to development mode
-     2. Run `docker-compose --profile deploy build`
-   - Build through docker:
-     1. Enter the jellyfindeploy directory using `cd jellyfindeploy`
-     2. Run `docker build . --build-arg="TV_IP=<ip address you wrote down from step 8 in setting the tv to development mode>"` e.g. `docker build . --build-arg="TV_IP=192.168.1.191"`
-4. If the build succeeds the Jellyfin app should be installed on your tv. If not, see [Troubleshooting](#troubleshooting).
+3. Modify docker-compose.yml file and set the TV_IP variable e.g. TV_IP=192.168.1.191 which is the ip address you wrote down from step 8 in setting the tv to development mode
+4. Run `docker-compose --profile deploy up --build`
+5. If the build succeeds the Jellyfin app should be installed on your tv. If not, see [Troubleshooting](#troubleshooting).
 
 ## Additional parameters
 
