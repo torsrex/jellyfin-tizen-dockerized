@@ -13,7 +13,7 @@ WORKDIR /app
 # Download and install tizen studio
 WORKDIR /app/tizen
 RUN curl -O $TIZEN_STUDIO_URL \
-    && chmod a+x web-cli_Tizen_Studio_*.bin \
+    && chmod +x web-cli_Tizen_Studio_*.bin \
     && ./web-cli_Tizen_Studio_*.bin <<EOF
 n
 y
@@ -30,8 +30,7 @@ COPY --chown=jellyfin certificates/author /home/jellyfin/tizen-studio-data/keyst
 COPY --chown=jellyfin certificates/profile /home/jellyfin/tizen-studio-data/profile
 COPY --chown=jellyfin certificates/distributor /home/jellyfin/tizen-studio/tools/certificate-generator/certificates/distributor
 
-# Do jellyfin stuff after copying certificates to use
-# cached certificates on subsequent builds
+# Do jellyfin stuff after copying certificates to cache tizen setup
 ARG NODE_MAJOR=20
 ARG JELLYFIN_VERSION=release-10.8.z
 
@@ -66,7 +65,7 @@ RUN tizen build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "
 
 # Emulate interactive input and build the package
 COPY --chown=jellyfin ./tizen-package.sh .
-RUN chmod a+x tizen-package.sh \
+RUN chmod +x tizen-package.sh \
     && ./tizen-package.sh
 
 # Add entrypoint to allow the installation step

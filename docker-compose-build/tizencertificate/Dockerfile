@@ -13,7 +13,7 @@ WORKDIR /app
 # Download and install tizen studio
 WORKDIR /app/tizen
 RUN curl -O $TIZEN_STUDIO_URL \
-    && chmod a+x web-cli_Tizen_Studio_*.bin \
+    && chmod +x web-cli_Tizen_Studio_*.bin \
     && ./web-cli_Tizen_Studio_*.bin <<EOF
 n
 y

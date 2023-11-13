@@ -13,7 +13,7 @@ WORKDIR /app
 # Download and install tizen studio
 WORKDIR /app/tizen
 RUN curl -O $TIZEN_STUDIO_URL \
-    && chmod a+x web-cli_Tizen_Studio_*.bin \
+    && chmod +x web-cli_Tizen_Studio_*.bin \
     && ./web-cli_Tizen_Studio_*.bin <<EOF
 n
 y
@@ -68,7 +68,7 @@ RUN tizen build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "
 
 # Emulate interactive input and build the package
 COPY --chown=jellyfin ./tizen-package.sh .
-RUN chmod a+x tizen-package.sh \
+RUN chmod +x tizen-package.sh \
     && ./tizen-package.sh
 
 # Set TV_IP at the end to cache previous work
