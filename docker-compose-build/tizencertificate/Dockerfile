@@ -1,6 +1,6 @@
 FROM ubuntu:mantic-20231011
 
-ENV TIZEN_STUDIO_URL=https://download.tizen.org/sdk/Installer/tizen-studio_5.5/web-cli_Tizen_Studio_5.5_ubuntu-64.bin
+ARG TIZEN_STUDIO_URL=https://download.tizen.org/sdk/Installer/tizen-studio_5.5/web-cli_Tizen_Studio_5.5_ubuntu-64.bin
 
 # Add build dependencies
 RUN apt-get update \
