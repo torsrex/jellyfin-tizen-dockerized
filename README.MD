@@ -30,11 +30,11 @@ This will run the entire build and installation procedure inside a single docker
 
 ## Option 2: Use intermediate container to export development certificates
 
-This will first generate the certificates and store them for later use so that if the Docker cache is cleared or the script is run on a different computer the certificates can still be used.
+This will first generate the certificates and store them for later use so that if the Docker cache is cleared or the script is run on a different computer the certificates can still be reused.
 
 1. Enter the docker-compose-build directory using `cd docker-compose-build`
 2. Run `docker-compose --profile certificate up --build` to generate the certificates
-3. Modify docker-compose.yml file and set the TV_IP variable e.g. TV_IP=192.168.1.191 which is the ip address you wrote down from step 8 in setting the tv to development mode
+3. Modify the docker-compose.yml file and set the TV_IP variable e.g. TV_IP=192.168.1.191 which is the ip address you wrote down from step 8 in setting the tv to development mode
 4. Run `docker-compose --profile deploy up --build`
 5. If the build succeeds the Jellyfin app should be installed on your tv. If not, see [Troubleshooting](#troubleshooting).
 
@@ -49,6 +49,7 @@ This will first generate the certificates and store them for later use so that i
 
 - The build crashes when installing Jellyfin on the tv with the error `reason: Author certificate not match` -> The generated certificate is incompatible with the current Jellyfin install. Uninstall Jellyfin on the TV and run the script again.
 - The build crashes with the error `Error: TV_IP is not set.` -> You forgot to set the TV_IP when running the docker build command.
+- You used option 1 and installed Jellyfin successfully, uninstalled it, and wanted to install it again, but nothing happens -> For simplicity sake, option 1 does everything during the docker build phase with no runtime step. However, this means that the install step is also cached if it succeeds. The script is set up so that if any of the parameters listed under [Additional parameters](#additional-parameters) changes then it will re-run the install. However, if you want to install the same version to the same TV, you can set the `NONCE` parameter to a random string (replace loremipsum) like so: `docker build . --build-arg="TV_IP=192.168.1.191" --build-arg="NONCE=loremipsum"`. Alternatively, use `docker build . --build-arg="TV_IP=192.168.1.191" --no-cache`, however, this will also run the build steps again so this will take longer.
 - The build crashes when installing jellyfin-web dependencies or building jellyfin-web --> Too little memory allocated to docker. In my testing I tried with 3.8GB initially which would occasionally crash. Increasing the limit to 10GB solved this.
   1. Open Docker Desktop
   2. Press the cogwheel in the top right

@@ -72,6 +72,7 @@ RUN chmod a+x tizen-package.sh \
     && ./tizen-package.sh
 
 # Set TV_IP at the end to cache previous work
+ARG NONCE=""
 ARG TV_IP
 RUN if [ -z "$TV_IP" ]; then echo "Error: TV_IP is not set."; exit 1; fi
 
