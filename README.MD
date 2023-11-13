@@ -4,7 +4,8 @@ This repository contains dockerized build steps for installing Jellyfin on a Tiz
 
 ## Prerequisites
 
-- Download and install [https://docs.docker.com/get-docker/](Docker) # TODO: Test windows
+- Download and install [https://docs.docker.com/get-docker/](Docker)
+  - Use WSL2 for Windows
 - Samsung TV in development mode
   1. Turn on TV
   2. Open the 'apps' app
@@ -50,8 +51,13 @@ This will first generate the certificates and store them for later use so that i
 - The build crashes when installing Jellyfin on the tv with the error `reason: Author certificate not match` -> The generated certificate is incompatible with the current Jellyfin install. Uninstall Jellyfin on the TV and run the script again.
 - The build crashes with the error `Error: TV_IP is not set.` -> You forgot to set the TV_IP when running the docker build command.
 - You used option 1 and installed Jellyfin successfully, uninstalled it, and wanted to install it again, but nothing happens -> For simplicity sake, option 1 does everything during the docker build phase with no runtime step as opposed to option 2. However, this means that the install step is also cached if it succeeds. The script is set up so that if any of the parameters listed under [Additional parameters](#additional-parameters) changes then it will re-run the install. However, if you want to install the same version to the same TV, you can set the `NONCE` parameter to a random string (replace loremipsum) like so: `docker build . --build-arg="TV_IP=192.168.1.191" --build-arg="NONCE=loremipsum"`. Alternatively, use `docker build . --build-arg="TV_IP=192.168.1.191" --no-cache`, however, this will also run the build steps again so this will take longer.
-- The build crashes when installing jellyfin-web dependencies or building jellyfin-web --> Too little memory allocated to docker. In my testing I tried with 3.8GB initially which would occasionally crash. Increasing the limit to 10GB solved this.
+- (Linux) The build crashes when installing jellyfin-web dependencies or building jellyfin-web --> Too little memory allocated to docker. In my testing I tried with 3.8GB initially which would occasionally crash. Increasing the limit to 10GB solved this.
   1. Open Docker Desktop
   2. Press the cogwheel in the top right
   3. Go to "Resources"
   4. Adjust the "Memory limit" slider
+- (Windows) The build fails with something like `/bin/sh: 1: /app/generate-certs.sh: not found` -> Git replaced LF with CRLF on Windows. Run the following commands and try again:
+  ```bash
+  git config --local core.autocrlf false
+  git checkout .
+  ```
